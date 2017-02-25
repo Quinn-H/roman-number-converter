@@ -1,21 +1,54 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 
 class App extends Component {
-  render() {
+  constructor (props) {
+    super(props)
+    this.state = {
+      input: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.convertToRoman = this.convertToRoman.bind(this)
+  }
+
+  handleSubmit (e) {
+    this.setState({input: e.target.value})
+  }
+
+  convertToRoman (num) {
+    var nums = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 }
+    var romans = ''
+    var invaild = 'The input must be a Number and in the range of 1 - 4999'
+
+    if (num > 4999 || isNaN(num) || num === 0) {
+      return invaild
+    } else {
+      for (var i in nums) {
+        while (num >= nums[i]) {
+          romans += i
+          num -= nums[i]
+        }
+      }
+      return romans
+    }
+  }
+  render () {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className='App'>
+        <div className='input'>
+          <input
+            placeholder='The input must be in the range of 1 - 4999'
+            type='text'
+            onChange={this.handleSubmit}
+            value={this.state.input}
+            />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className='roman'>
+          <h1>{this.convertToRoman(this.state.input)}</h1>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
