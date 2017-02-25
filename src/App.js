@@ -24,9 +24,11 @@ class App extends Component {
       return invaild
     } else {
       for (var i in nums) {
-        while (num >= nums[i]) {
-          romans += i
-          num -= nums[i]
+        if (nums.hasOwnProperty(i)) {
+          while (num >= nums[i]) {
+            romans += i
+            num -= nums[i]
+          }
         }
       }
       return romans
