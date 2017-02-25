@@ -5,14 +5,14 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      input: ''
+      inputNum: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.convertToRoman = this.convertToRoman.bind(this)
   }
 
   handleSubmit (e) {
-    this.setState({input: e.target.value})
+    this.setState({inputNum: e.target.value})
   }
 
   convertToRoman (num) {
@@ -42,11 +42,11 @@ class App extends Component {
             placeholder='The input must be in the range of 1 - 4999'
             type='text'
             onChange={this.handleSubmit}
-            value={this.state.input}
+            value={this.state.inputNum}
             />
         </div>
         <div className='roman'>
-          <h1>{this.convertToRoman(this.state.input)}</h1>
+          <h1>{this.convertToRoman(this.state.inputNum)}</h1>
         </div>
       </div>
     )
