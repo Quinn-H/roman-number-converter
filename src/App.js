@@ -1,14 +1,26 @@
 import React, { Component } from 'react'
+import ClipboardButton from 'react-clipboard.js'
 import './App.css'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      inputNum: ''
+      inputNum: '',
+      copy: 'Copy'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.convertToRoman = this.convertToRoman.bind(this)
+    this.onSuccess = this.onSuccess.bind(this)
+    this.resetInput = this.resetInput.bind(this)
+  }
+
+  resetInput () {
+    this.setState({inputNum: '', copy: 'copy'})
+  }
+
+  onSuccess () {
+    this.setState({copy: 'Copied'})
   }
 
   handleSubmit (e) {
@@ -35,6 +47,7 @@ class App extends Component {
     }
   }
   render () {
+    const submitDisable = !this.state.inputNum
     return (
       <div className='container'>
         <div className='span12'>
@@ -50,10 +63,14 @@ class App extends Component {
           </div>
           <div className='bd-clipboard'>
             <div className='highlight'>
-            <h2 id='roman'>{this.convertToRoman(this.state.inputNum)}</h2>
+              <h2 id='roman'>{this.convertToRoman(this.state.inputNum)}</h2>
             </div>
           </div>
-          <button>Copy</button>
+          <ClipboardButton
+            className='btn prime'
+            onSuccess={this.onSuccess}
+            data-clipboard-target='#roman'>{ this.state.copy }</ClipboardButton>
+          <button disabled={submitDisable} className='btn prime' onClick={this.resetInput}>Reset</button>
         </div>
       </div>
     )
