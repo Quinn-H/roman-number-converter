@@ -36,17 +36,24 @@ class App extends Component {
   }
   render () {
     return (
-      <div className='App'>
-        <div className='input'>
-          <input
-            placeholder='The input must be in the range of 1 - 4999'
-            type='text'
-            onChange={this.handleSubmit}
-            value={this.state.inputNum}
-            />
-        </div>
-        <div className='roman'>
-          <h1>{this.convertToRoman(this.state.inputNum)}</h1>
+      <div className='container'>
+        <div className='span12'>
+          <h1>Roman Number Converter</h1>
+          <div className='input'>
+            <input
+              className='textBox'
+              placeholder='The input must be in the range of 1 - 4999'
+              type='text'
+              onChange={this.handleSubmit}
+              value={this.state.inputNum}
+              />
+          </div>
+          <div className='bd-clipboard'>
+            <div className='highlight'>
+            <h2 id='roman'>{this.convertToRoman(this.state.inputNum)}</h2>
+            </div>
+          </div>
+          <button>Copy</button>
         </div>
       </div>
     )
